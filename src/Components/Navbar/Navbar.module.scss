@@ -1,0 +1,87 @@
+$breakpoints: 1700px;
+
+$mainDarkColor: #36332f;
+
+body * {
+	font-size: 16px;
+	user-select: none;
+	font-family: 'Montserrat';
+}
+
+.navbar {
+	height: 100px;
+	width: 100vw;
+	position: fixed;
+
+	background: #ffffff00;
+	border-bottom: 1px solid red;
+}
+
+.navbar_navContainer {
+	border-left: 1px solid blue;
+	border-right: 1px solid blue;
+
+	display: flex;
+	flex-direction: row;
+
+	margin: 0 auto;
+
+	height: 100%;
+
+	@each $breakpoint in $breakpoints {
+		@media (min-width: #{$breakpoint}) {
+			width: #{$breakpoint};
+		}
+	}
+}
+
+.navbar_logo {
+	height: 100%;
+	aspect-ratio: 1;
+
+	background: url(/svg/logo.svg) no-repeat center;
+	background-size: contain;
+}
+
+.navbar_menu {
+	height: inherit;
+	width: 100%;
+
+	& > .navbar_menuList {
+		margin: 0;
+		padding: 0;
+		height: inherit;
+		list-style: none;
+
+		display: flex;
+		flex-direction: row;
+		gap: 20px;
+		justify-content: center;
+
+		& > .navbar_menuListItem {
+			height: inherit;
+
+			& > .navbar_menuLink {
+				color: $mainDarkColor;
+				text-decoration: none;
+				line-height: 100px;
+			}
+		}
+	}
+}
+
+.navbar_login {
+	top: 50%;
+	position: relative;
+	transform: translateY(-50%);
+	padding: 6px 8px;
+
+	height: min-content;
+	width: max-content;
+	line-height: normal;
+
+	background: #00000000;
+	border: 1px solid $mainDarkColor;
+	border-radius: 9px;
+	text-wrap: nowrap;
+}
