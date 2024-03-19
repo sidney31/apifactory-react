@@ -1,6 +1,6 @@
 import 'normalize.css'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import Home from './screens/Home/Home.tsx'
 import './styles/common.scss'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<App />)
+ReactDOM.createRoot(document.getElementById('root')!).render(<Home />)

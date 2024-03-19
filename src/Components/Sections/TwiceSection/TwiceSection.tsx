@@ -10,14 +10,16 @@ export interface Props {
 
 export const TwiceSection = (props: Props) => {
 	return (
-		<section className={styles.container}>
-			<div className={styles.text}>
-				<p className={styles.text_small}>{props.text_small}</p>
-				<p className={styles.text_title}>{props.text_title}</p>
-				<p className={styles.text_subtitle}>{props.text_subtitle}</p>
-				<button>{props.text_subtitle_button}</button>
+		<section>
+			<div className={styles.container}>
+				<div className={styles.text}>
+					<p className={styles.text_small}>{props.text_small}</p>
+					<p className={styles.text_title}>{props.text_title}</p>
+					<p className={styles.text_subtitle}>{props.text_subtitle}</p>
+					<button>{props.text_subtitle_button}</button>
+				</div>
+				<div className={styles.image}></div>
 			</div>
-			<div className={styles.image}></div>
 		</section>
 	)
 }

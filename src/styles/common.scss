@@ -1,5 +1,9 @@
 @import 'fonts.scss';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 $mainDarkColor: #36332f;
 $breakpoints: 1050px;
 
@@ -22,6 +26,12 @@ button {
 	border-radius: 9px;
 	text-wrap: nowrap;
 	transition: all 0.3s ease;
+	@media (hover) {
+		&:hover {
+			background: $mainDarkColor;
+			color: white;
+		}
+	}
 }
 
 [class*='container'] {
