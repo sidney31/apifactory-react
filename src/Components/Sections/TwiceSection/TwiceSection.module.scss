@@ -1,0 +1,47 @@
+section {
+	height: auto;
+	width: 100vw;
+	background: white;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	padding: 100px 0;
+	gap: 50px;
+}
+
+.text {
+	width: 50%;
+	height: 100%;
+	margin: 0;
+}
+
+.text_small {
+	font-size: 14px;
+	font-weight: 500;
+	margin: 0;
+	margin-bottom: 22px;
+}
+
+.text_title {
+	margin: 0;
+	margin-bottom: 20px;
+	font-size: 36px;
+	font-weight: 600;
+}
+
+.text_subtitle {
+	font-weight: 300;
+	font-size: 15px;
+	line-height: 25px;
+	margin: 0;
+	margin-bottom: 27px;
+	margin-right: 10px;
+}
+
+.image {
+	width: 50%;
+	aspect-ratio: 1;
+	background: #7d7d7d;
+}

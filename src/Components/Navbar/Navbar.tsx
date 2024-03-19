@@ -4,7 +4,7 @@ export const Navbar = function () {
 	return (
 		<>
 			<nav className={styles.navbar}>
-				<div className={styles.navbar_navContainer}>
+				<div className={styles.navbar_nav__container}>
 					<a href='#' className={styles.navbar_logo}></a>
 					<div className={styles.navbar_menu}>
 						<ul className={styles.navbar_menuList}>

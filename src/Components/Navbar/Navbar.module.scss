@@ -1,38 +1,23 @@
-$breakpoints: 1700px;
-
-$mainDarkColor: #36332f;
-
-body * {
-	font-size: 16px;
-	user-select: none;
-	font-family: 'Montserrat';
-}
+@import '/src/styles/common.scss';
 
 .navbar {
 	height: 100px;
 	width: 100vw;
 	position: fixed;
 
-	background: #ffffff00;
-	border-bottom: 1px solid red;
+	background: #00000000;
+	z-index: 999;
 }
 
-.navbar_navContainer {
-	border-left: 1px solid blue;
-	border-right: 1px solid blue;
-
+.navbar_nav__container {
 	display: flex;
 	flex-direction: row;
 
 	margin: 0 auto;
+	padding: 0 10px;
 
 	height: 100%;
-
-	@each $breakpoint in $breakpoints {
-		@media (min-width: #{$breakpoint}) {
-			width: #{$breakpoint};
-		}
-	}
+	width: auto !important;
 }
 
 .navbar_logo {
@@ -60,13 +45,35 @@ body * {
 
 		& > .navbar_menuListItem {
 			height: inherit;
+			display: flex;
+			align-items: center;
 
 			& > .navbar_menuLink {
 				color: $mainDarkColor;
 				text-decoration: none;
-				line-height: 100px;
+			}
+
+			& > .navbar_menuLink:after {
+				display: block;
+				content: '';
+				position: relative;
+				width: 100%;
+				transform: scaleX(0);
+				height: 2px;
+				background-color: $mainDarkColor;
+				transform-origin: bottom right;
+				transition: transform 0.3s;
+			}
+
+			& > .navbar_menuLink:hover:after {
+				transform: scaleX(1);
+				transform-origin: bottom left;
 			}
 		}
+	}
+
+	@media (max-width: 768px) {
+		display: none;
 	}
 }
 
@@ -76,12 +83,12 @@ body * {
 	transform: translateY(-50%);
 	padding: 6px 8px;
 
-	height: min-content;
-	width: max-content;
-	line-height: normal;
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
 
-	background: #00000000;
-	border: 1px solid $mainDarkColor;
-	border-radius: 9px;
-	text-wrap: nowrap;
+button:hover {
+	background: $mainDarkColor;
+	color: white;
 }
