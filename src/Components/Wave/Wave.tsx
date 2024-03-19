@@ -75,6 +75,16 @@ export const Wave = () => {
 		}
 
 		animate()
+
+		window.addEventListener('scroll', () => {
+			waveHeight = window.scrollY <= 60 ? 30 : window.scrollY / 1.5
+		})
+
+		window.addEventListener('resize', () => {
+			renderer.setSize(window.innerWidth, window.innerHeight)
+			camera.aspect = window.innerWidth / window.innerHeight
+			camera.updateProjectionMatrix()
+		})
 	}, [])
 
 	return <div ref={waveRef}></div>
