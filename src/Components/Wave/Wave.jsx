@@ -5,20 +5,19 @@ import Perlin from './perlin.js'
 export const Wave = () => {
 	const waveRef = useRef(null)
 
-	var width: number
-	var height: number
-	var width: number
-	var size: number
-	var t: number
-	var waveHeight: number
-	var perlin: Perlin
-	var scene: THREE.Scene
-	var camera: THREE.PerspectiveCamera
-	var renderer: THREE.WebGLRenderer
-	var geometry: THREE.PlaneGeometry
-	var wireframe: THREE.WireframeGeometry
-	var lineMaterial: THREE.LineBasicMaterial
-	var line: THREE.LineSegments
+	let width
+	let height
+	let size
+	let t
+	let waveHeight
+	let perlin
+	let scene
+	let camera
+	let renderer
+	let geometry
+	let wireframe
+	let lineMaterial
+	let line
 
 	useEffect(() => {
 		width = window.innerWidth
@@ -37,12 +36,8 @@ export const Wave = () => {
 		renderer.setSize(width, height)
 		renderer.setPixelRatio(window.devicePixelRatio)
 
-		const target: React.HTMLProps<HTMLDivElement> = waveRef.current ? (
-			waveRef.current
-		) : (
-			<div></div>
-		)
-		target.appendChild(renderer.domElement)
+		const target = waveRef.current
+		target?.appendChild(renderer.domElement)
 
 		geometry = new THREE.PlaneGeometry(
 			size * 1.3,
@@ -57,7 +52,7 @@ export const Wave = () => {
 		line.rotation.x = -88 * (Math.PI / 180) // deg to rad: `degrees * (PI / 180 `;
 		scene.add(line)
 
-		function updateVertices(geom: THREE.LineSegments) {
+		function updateVertices(geom) {
 			let vertices = geom.geometry.attributes.position.array
 
 			for (let i = 0; i <= vertices.length; i += 3) {
