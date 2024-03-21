@@ -13,6 +13,7 @@
     "@mui/base": "^5.0.0-beta.40",
     "@react-three/fiber": "^8.15.19",
     "@thewhodidthis/butter": "github:thewhodidthis/butter",
+    "@types/react-leaflet": "^3.0.0",
     "@types/three": "^0.162.0",
     "classnames": "^2.5.1",
     "locomotive-scroll": "^5.0.0-beta.11",
@@ -24,7 +25,7 @@
     "three": "^0.162.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.64",
+    "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
