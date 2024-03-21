@@ -1,3 +1,4 @@
+import { Contact, ContactType } from '../../components/Contact.tsx'
 import { Navbar } from '../../components/navbar/Navbar.tsx'
 import { QuestionBox } from '../../components/QuestionBox.tsx'
 import { CardsSection } from '../../components/sections/CardsSection/CardsSection.tsx'
@@ -147,6 +148,29 @@ function Home() {
 		{ image_path: '/svg/Pressman.svg', title: 'Pressman' },
 	]
 
+	const CONTACTS_CARDS = [
+		{
+			title: 'E-mail',
+			subtitle:
+				'Для оперативной связи и отправки запросов через электронную почту',
+			data: 'info@api-factory.ru',
+			type: ContactType.email,
+		},
+		{
+			title: 'Телефон',
+			subtitle:
+				'Для быстрой связи и обратной связи по вопросам, требующим оперативного решения.',
+			data: '8 (495) 999-99-99',
+			type: ContactType.phone,
+		},
+		{
+			title: 'Адресс',
+			subtitle: 'Для личного обращения или отправки почтовой корреспонденции',
+			data: '121205, Российская Федерация, г. Москва, тер. Инновационного центра Сколково, Большой бульвар, д. 40',
+			type: ContactType.address,
+		},
+	]
+
 	return (
 		<>
 			<Navbar />
@@ -241,6 +265,29 @@ function Home() {
 								answer={iterator.answer}
 							/>
 						))}
+						<div className='text-center'>
+							<h1 className='font-semibold text-[32px] mt-[38px]'>
+								Остались вопросы?
+							</h1>
+							<p className='text-[16px] mt-[12px]'>
+								Свяжитесь с нами и получите больше информации
+							</p>
+							<button className='mt-[38px]'>Заказать обратный звонок</button>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div className='container'>
+						<div className='flex flex-row justify-between'>
+							{CONTACTS_CARDS.map(contact => (
+								<Contact
+									title={contact.title}
+									subtitle={contact.subtitle}
+									data={contact.data}
+									type={contact.type}
+								/>
+							))}
+						</div>
 					</div>
 				</section>
 			</main>
