@@ -1,3 +1,4 @@
+import { ReactKeycloakProvider } from '@react-keycloak/web'
 import { Contact, ContactType } from '../../components/Contact.tsx'
 import { Footer } from '../../components/footer/Footer.tsx'
 import { Navbar, Position } from '../../components/navbar/Navbar.tsx'
@@ -6,6 +7,7 @@ import { CardsSection } from '../../components/sections/CardsSection/CardsSectio
 import { TextSection } from '../../components/sections/TextSection/TextSection.tsx'
 import { TwiceSection } from '../../components/sections/TwiceSection/TwiceSection.tsx'
 import { Wave } from '../../components/wave/Wave.jsx'
+import { keycloak } from '../../keycloak.ts'
 import '../../scripts/scrollHandler.js'
 import app from '../../styles/app.module.scss'
 import '../../styles/common.scss'
@@ -173,7 +175,7 @@ function Home() {
 	]
 
 	return (
-		<>
+		<ReactKeycloakProvider authClient={keycloak}>
 			<Navbar
 				position={Position.top}
 				logo_path='/svg/logo.svg'
@@ -302,7 +304,7 @@ function Home() {
 				</section>
 			</main>
 			<Footer />
-		</>
+		</ReactKeycloakProvider>
 	)
 }
 
