@@ -1,6 +1,20 @@
 import styles from './Navbar.module.scss'
 
-export const Navbar = function () {
+export const Navbar = () => {
+	const scrollHandler = () => {
+		const HERO_HEIGHT = document.querySelector("[class*='hero']")?.clientHeight
+		if (!HERO_HEIGHT) return false
+		const scrollTop = window.scrollY > HERO_HEIGHT / 2 ? window.scrollY / 10 : 0
+		document
+			.querySelector('nav')
+			?.setAttribute(
+				'style',
+				`background-color: rgba(255, 255, 255, ${scrollTop}%)`
+			)
+	}
+
+	document.addEventListener('scroll', scrollHandler)
+
 	return (
 		<>
 			<nav className={styles.navbar}>

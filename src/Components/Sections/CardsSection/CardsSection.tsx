@@ -2,7 +2,9 @@ import { Card } from '../../Card'
 import styles from './CardsSection.module.scss'
 
 export interface Props {
-	className: string
+	className?: string
+	text_title: string
+	text_subtitle: string
 	cards: Array<Card>
 }
 
@@ -17,20 +19,13 @@ export const CardsSection = (props: Props) => {
 		<section className={props.className}>
 			<div className='container'>
 				<div className={styles.text}>
-					<p className={styles.text_title}>
-						Получите комплексные услуги ИТ-аутсорсинга
-					</p>
-					<p className={styles.text_subtitle}>
-						Наши сервисы позволяет вашей компании передать всю ответственность
-						за защиту данных профессиональной команде экспертов в области ИБ. Мы
-						обеспечим постоянный мониторинг, анализ уязвимостей, реагирование на
-						инциденты и обучение персонала, чтобы обеспечить комплексную
-						безопасность вашей информации.
-					</p>
+					<p className={styles.text_title}>{props.text_title}</p>
+					<p className={styles.text_subtitle}>{props.text_subtitle}</p>
 				</div>
 				<div className={styles.cards}>
 					{props.cards.map(card => (
 						<Card
+							key={card.title}
 							image_path={card.title}
 							title={card.title}
 							subtitle={card.subtitle}
