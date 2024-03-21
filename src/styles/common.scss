@@ -5,10 +5,10 @@
 @tailwind utilities;
 
 $mainDarkColor: #36332f;
+$mainWhiteColor: #f5f5f5;
 $breakpoints: 1050px;
 
 * {
-	color: $mainDarkColor;
 	font-size: 16px;
 	font-family: 'Montserrat';
 	max-width: 100%;
@@ -41,4 +41,16 @@ button {
 		}
 	}
 	margin: 0 auto;
+}
+
+::selection {
+	background-color: $mainDarkColor;
+	color: $mainWhiteColor;
+	text-shadow: none;
+}
+
+::-moz-selection {
+	background-color: $mainDarkColor;
+	color: $mainWhiteColor;
+	text-shadow: none;
 }

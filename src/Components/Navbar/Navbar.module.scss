@@ -3,7 +3,6 @@
 .navbar {
 	height: 100px;
 	width: 100vw;
-	position: fixed;
 
 	background: #00000000;
 	z-index: 999;
@@ -22,11 +21,17 @@
 }
 
 .navbar_logo {
-	height: 100%;
-	aspect-ratio: 1;
+	height: 100px;
+	width: 200px;
+	object-fit: contain;
+	object-position: center;
+	flex-grow: 1;
+	flex-shrink: 0;
 
-	background: url(/svg/logo.svg) no-repeat center;
-	background-size: contain;
+	& > * {
+		height: 100px;
+		width: auto;
+	}
 }
 
 .navbar_menu {
@@ -50,7 +55,6 @@
 			align-items: center;
 
 			& > .navbar_menuLink {
-				color: $mainDarkColor;
 				text-decoration: none;
 			}
 
@@ -78,13 +82,15 @@
 	}
 }
 
-.navbar_login {
-	top: 50%;
-	position: relative;
-	transform: translateY(-50%);
-	padding: 6px 8px;
+.rightSide {
+	width: 200px;
+	flex-grow: 1;
+	flex-shrink: 0;
+}
 
-	@media (max-width: 768px) {
-		display: none;
-	}
+.rightSide > * {
+	transform: translateY(-50%);
+	position: relative;
+	top: 50%;
+	float: right;
 }

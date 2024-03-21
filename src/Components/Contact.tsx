@@ -15,10 +15,12 @@ export const Contact = (props: Props) => {
 	return (
 		<div className='flex flex-col w-[270px]'>
 			<h2 className='font-bold text-[40px] mb-[38px]'>{props.title}</h2>
-			<p className='font-light text-[14px] mb-[36px]'>{props.subtitle}</p>
+			<p className='font-light text-[14px] mb-[36px] min-h-[70px]'>
+				{props.subtitle}
+			</p>
 			<a
 				href={`${props.type}:${props.data}`}
-				className='font-light text-[20px] text-[#36332f]'
+				className='font-light text-[20px] text-[#36332f] hover:underline'
 			>
 				{props.data}
 			</a>

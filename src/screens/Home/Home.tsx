@@ -1,5 +1,6 @@
 import { Contact, ContactType } from '../../components/Contact.tsx'
-import { Navbar } from '../../components/navbar/Navbar.tsx'
+import { Footer } from '../../components/footer/Footer.tsx'
+import { Navbar, Position } from '../../components/navbar/Navbar.tsx'
 import { QuestionBox } from '../../components/QuestionBox.tsx'
 import { CardsSection } from '../../components/sections/CardsSection/CardsSection.tsx'
 import { TextSection } from '../../components/sections/TextSection/TextSection.tsx'
@@ -164,7 +165,7 @@ function Home() {
 			type: ContactType.phone,
 		},
 		{
-			title: 'Адресс',
+			title: 'Адрес',
 			subtitle: 'Для личного обращения или отправки почтовой корреспонденции',
 			data: '121205, Российская Федерация, г. Москва, тер. Инновационного центра Сколково, Большой бульвар, д. 40',
 			type: ContactType.address,
@@ -173,7 +174,11 @@ function Home() {
 
 	return (
 		<>
-			<Navbar />
+			<Navbar
+				position={Position.top}
+				logo_path='/svg/logo.svg'
+				right_side={<button>Вход для клиентов</button>}
+			/>
 			<main>
 				<div className={app.hero}>
 					<Wave />
@@ -231,7 +236,7 @@ function Home() {
 						</h1>
 						<div className='flex justify-between'>
 							{SOLUTIONS_CARDS.map(card => (
-								<div className='w-[200px] flex flex-col'>
+								<div key={card.image_path} className='w-[200px] flex flex-col'>
 									<img
 										className='h-[50px] mb-[28px]'
 										src={card.image_path}
@@ -248,7 +253,11 @@ function Home() {
 						</h1>
 						<div className='flex justify-between'>
 							{CUSTOMERS_CARDS.map(card => (
-								<img src={card.image_path} alt={card.title} />
+								<img
+									key={card.image_path}
+									src={card.image_path}
+									alt={card.title}
+								/>
 							))}
 						</div>
 					</div>
@@ -281,6 +290,7 @@ function Home() {
 						<div className='flex flex-row justify-between'>
 							{CONTACTS_CARDS.map(contact => (
 								<Contact
+									key={contact.data}
 									title={contact.title}
 									subtitle={contact.subtitle}
 									data={contact.data}
@@ -291,6 +301,7 @@ function Home() {
 					</div>
 				</section>
 			</main>
+			<Footer />
 		</>
 	)
 }

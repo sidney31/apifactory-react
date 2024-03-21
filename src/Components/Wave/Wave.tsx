@@ -25,13 +25,12 @@ export const Wave = () => {
 		height = window.innerHeight
 		size = (width + height) / 2
 		t = 0
-		waveHeight = 30
+		waveHeight = 50
 		perlin = new Perlin()
 
 		scene = new THREE.Scene()
 		camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 10000)
 		camera.position.z = size / 1.3
-		// camera.position.y = (size / 100) * -20
 
 		renderer = new THREE.WebGLRenderer({ antialias: true })
 		renderer.setClearColor(0xf5f5f5)
@@ -71,7 +70,7 @@ export const Wave = () => {
 
 		var animate = function () {
 			requestAnimationFrame(animate)
-			t += 0.001
+			t += 0.002
 			updateVertices(line)
 			renderer.render(scene, camera)
 		}
@@ -79,7 +78,7 @@ export const Wave = () => {
 		animate()
 
 		window.addEventListener('scroll', () => {
-			waveHeight = window.scrollY <= 60 ? 30 : window.scrollY / 1.5
+			waveHeight = window.scrollY <= 50 ? 50 : window.scrollY / 1.5
 		})
 
 		window.addEventListener('resize', () => {
