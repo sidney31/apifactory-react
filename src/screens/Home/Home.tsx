@@ -86,6 +86,67 @@ function Home() {
 		button_text: 'Узнать больше',
 	}
 
+	const FAQ = [
+		{
+			question: 'Что такое аутсорсинг IT-услуг?',
+			answer:
+				'ИТ-аутсорсинг — это практика найма внешних поставщиков услуг для выполнения задач и функций, связанных с ИТ.',
+		},
+		{
+			question: 'Какие виды IT-услуг предоставляет ваша компания?',
+			answer:
+				'Мы предоставляем весь спектр IT-услуг, включая разработку программного обеспечения, веб-разработку, техническую поддержку и консалтинг.',
+		},
+		{
+			question: 'Каковы преимущества аутсорсинга информационной безопасности?',
+			answer:
+				'Преимущества аутсорсинга ИБ включают экспертность, сокращение затрат, обновление технологий и снижение рисков в области защиты конфидециальных данных.',
+		},
+		{
+			question: 'Входит ли мониторинг серверов и сетей в ваши услуги?',
+			answer:
+				'Да, мы предоставляем непрерывный контроль и оперативное реагирование на любые сетевые проблемы, включая несанкционированный доступ и изменения конфигурации оборудования.',
+		},
+		{
+			question:
+				'Как вы обеспечиваете конфиденциальность клиентской информации?',
+			answer:
+				'Мы обеспечиваем конфиденциальность клиентской информации через защищенные системы, шифрование данных и обучение сотрудников по вопросам безопасности.',
+		},
+		{
+			question:
+				'Какие меры предосторожности использует ваша компания для предотвращения кибератак?',
+			answer:
+				'Мы используем собственные разработки для мониторинга сетевой активности, сбора событий информационной безопасности и проводим регулярный аудит систем безопасности.',
+		},
+	]
+
+	const SOLUTIONS_CARDS = [
+		{
+			image_path: '/svg/oil-rig.svg',
+			title: 'Нефтегазовое машиностроение',
+		},
+		{ image_path: '/svg/barrel.svg', title: 'Нефтесервис' },
+		{
+			image_path: '/svg/bucket-wheel.svg',
+			title: 'Горнорудная отрасль',
+		},
+		{ image_path: '/svg/pipe.svg', title: 'Трубная отрасль' },
+	]
+
+	const CUSTOMERS_CARDS = [
+		{
+			image_path: '/svg/Rimera.svg',
+			title: 'Rimera',
+		},
+		{ image_path: '/svg/Bistrickinskaya.svg', title: 'Bistrickinskaya' },
+		{
+			image_path: '/svg/Cybersteel.svg',
+			title: 'Cybersteel',
+		},
+		{ image_path: '/svg/Pressman.svg', title: 'Pressman' },
+	]
+
 	return (
 		<>
 			<Navbar />
@@ -141,10 +202,45 @@ function Home() {
 				/>
 				<section>
 					<div className='container'>
-						<QuestionBox
-							question='Что такое аутсорсинг IT-услуг?'
-							answer='ИТ-аутсорсинг — это практика найма внешних поставщиков услуг для выполнения задач и функций, связанных с ИТ.'
-						/>
+						<h1 className='text-center font-semibold text-[36px] mb-[44px]'>
+							Различные отраслевые решения
+						</h1>
+						<div className='flex justify-between'>
+							{SOLUTIONS_CARDS.map(card => (
+								<div className='w-[200px] flex flex-col'>
+									<img
+										className='h-[50px] mb-[28px]'
+										src={card.image_path}
+										alt={card.title}
+									/>
+									<p className='font-semibold text-[20px] text-center'>
+										{card.title}
+									</p>
+								</div>
+							))}
+						</div>
+						<h1 className='mt-[60px] text-center font-bold text-[24px] mb-[44px]'>
+							Нам доверяют ведущие компании отрасли по всему миру
+						</h1>
+						<div className='flex justify-between'>
+							{CUSTOMERS_CARDS.map(card => (
+								<img src={card.image_path} alt={card.title} />
+							))}
+						</div>
+					</div>
+				</section>
+				<section className='bg-[#f5f5f5]'>
+					<div className='container'>
+						<h1 className='text-center font-semibold text-[36px] mb-[36px]'>
+							Часто задаваемые вопросы
+						</h1>
+						{FAQ.map(iterator => (
+							<QuestionBox
+								key={iterator.question}
+								question={iterator.question}
+								answer={iterator.answer}
+							/>
+						))}
 					</div>
 				</section>
 			</main>
