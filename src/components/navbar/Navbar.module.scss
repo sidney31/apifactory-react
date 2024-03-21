@@ -1,5 +1,7 @@
 @import '/src/styles/common.scss';
 
+$navbar_breakpoints: (1280px, 1700px);
+
 .navbar {
 	height: 100px;
 	width: 100vw;
@@ -17,7 +19,12 @@
 	padding: 0 10px;
 
 	height: 100%;
-	width: auto !important;
+
+	@each $navbar_breakpoint in $navbar_breakpoints {
+		@media (min-width: #{$navbar_breakpoint}) {
+			width: #{$navbar_breakpoint} !important;
+		}
+	}
 }
 
 .navbar_logo {
@@ -86,6 +93,10 @@
 	width: 200px;
 	flex-grow: 1;
 	flex-shrink: 0;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 }
 
 .rightSide > * {
