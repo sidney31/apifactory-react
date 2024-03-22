@@ -14,7 +14,7 @@ export enum ContactType {
 export const Contact = (props: Props) => {
 	return (
 		<div className='flex flex-col w-[270px]'>
-			<h2 className='font-bold text-[40px] mb-[38px]'>{props.title}</h2>
+			<h2 className='font-bold text-[40px] mb-[36px]'>{props.title}</h2>
 			<p className='font-light text-[14px] mb-[36px] min-h-[70px]'>
 				{props.subtitle}
 			</p>

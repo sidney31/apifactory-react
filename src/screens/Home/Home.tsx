@@ -1,193 +1,65 @@
-import { ReactKeycloakProvider } from '@react-keycloak/web'
-import { Contact, ContactType } from '../../components/Contact.tsx'
+import { useKeycloak } from '@react-keycloak/web'
+import { Contact } from '../../components/Contact.tsx'
+import { QuestionBox } from '../../components/QuestionBox.tsx'
 import { Footer } from '../../components/footer/Footer.tsx'
 import { Navbar, Position } from '../../components/navbar/Navbar.tsx'
-import { QuestionBox } from '../../components/QuestionBox.tsx'
 import { CardsSection } from '../../components/sections/CardsSection/CardsSection.tsx'
 import { TextSection } from '../../components/sections/TextSection/TextSection.tsx'
+
 import { TwiceSection } from '../../components/sections/TwiceSection/TwiceSection.tsx'
 import { Wave } from '../../components/wave/Wave.jsx'
-import { keycloak } from '../../keycloak.ts'
 import '../../scripts/scrollHandler.js'
 import app from '../../styles/app.module.scss'
 import '../../styles/common.scss'
+import * as db from './db.js'
 
 function Home() {
-	const NAV_LINKS = [
-		{ text: 'О компании', url: '/about' },
-		{ text: 'Отраслевые решения', url: '/solutions' },
-		{ text: 'Услуги и цены', url: '/services_and_prices' },
-		{ text: 'Заказчики', url: '/customers' },
-		{ text: 'Контакты', url: '/contacts' },
-	]
-	const OUTSOURCING_BLOCK = {
-		text_small: 'Аутсорсинг',
-		text_title: 'Трансформируйте свой бизнес с помощью наших решений',
-		text_subtitle:
-			'Мы предлагаем широкий спектр услуг ИТ-аутсорсинга, которые помогут предприятиям оптимизировать операции, снизить затраты и стимулировать рост. Наша команда экспертов будет тесно сотрудничать с вами, чтобы понять ваши уникальные потребности и предложить индивидуальные решения, соответствующие вашим целям.',
-		text_subtitle_button: 'Заказать презентацию',
-		image_path: '',
-	}
-
-	const INNOVATIONS_BLOCK = {
-		text_small: 'Инновации',
-		text_title: 'Мы используем собственные разработки',
-		text_subtitle:
-			'Наша команда опытных разработчиков применяет передовые технологии и инновационные подходы для достижения решений, которые автоматизируют процессы и повышают эффективность вашего бизнеса',
-		text_subtitle_button: 'Заказать презентацию',
-		image_path: '',
-	}
-
-	const SERVICE_BLOCK = {
-		text_title: 'Получите комплексные услуги ИТ-аутсорсинга',
-		text_subtitle:
-			'Наш процесс предоставления услуг ИТ-аутсорсинга прост и эффективен. Сначала мы анализируем ваши требования и создаем индивидуальный план. Затем наша команда экспертов занимается разработкой и внедрением. Наконец, мы обеспечиваем постоянную поддержку и обслуживание для обеспечения бесперебойной работы.',
-		cards: [
-			{
-				image_path: '/',
-				title: 'Системное администрирование',
-				subtitle:
-					'Наши опытные специалисты по системному администрированию готовы обеспечить непрерывную работу ваших рабочих серверов, электронной почты, средой виртуализации. Мы предлагаем гибкие тарифы и индивидуальный подход к каждому клиенту, чтобы дать вам уверенность в надежности вашей IT-инфраструктуры.',
-			},
-			{
-				image_path: '/',
-				title: 'Управление сетями передачи данных',
-				subtitle:
-					'Мы предлагаем комплексное сопровождение и оптимизацию сетевой инфраструктуры вашей компании. Наши специалисты обеспечат надежную работу сети, контроль за безопасностью данных, мониторинг производительности и своевременное устранение любых неполадок.',
-			},
-			{
-				image_path: '/',
-				title: 'Комплексная техническая поддержка',
-				subtitle:
-					'Услуга предоставляет профессиональное обслуживание и консультации по вопросам информационных технологий. Наша команда всегда на связи и оперативно реагирует на запросы клиентов, гарантируя высокий уровень сервиса и удовлетворение потребностей вашего бизнеса.',
-			},
-		],
-	}
-	const SECURITY_BLOCK = {
-		text_title: 'Современные технологии информационной безопасности',
-		text_subtitle:
-			'Наши сервисы позволяет вашей компании передать всю ответственность за защиту данных профессиональной команде экспертов в области ИБ. Мы обеспечим постоянный мониторинг, анализ уязвимостей, реагирование на инциденты и обучение персонала, чтобы обеспечить комплексную безопасность вашей информации.',
-		cards: [
-			{
-				image_path: '/',
-				title: 'Противодействие утечкам информации',
-				subtitle:
-					'Сервис DLP обеспечивает защиту конфиденциальных данных и информации компании, помогая предотвратить утечки и соблюдать законы о персональных данных.',
-			},
-			{
-				image_path: '/',
-				title: 'Управление уязвимостями',
-				subtitle:
-					'Мы помогаем своевременно обнаружить, классифицировать и устранить уязвимости в ИТ-системах, обеспечивая безопасность бизнеса.',
-			},
-			{
-				image_path: '/',
-				title: 'Цифровая криминалистика',
-				subtitle:
-					'Мы предоставляем экспертную помощь в расследовании киберпреступлений, анализе цифровых следов и обеспечении безопасности информации.',
-			},
-		],
-	}
-
-	const TEXT_SECTION_BLOCK = {
-		text_small: 'Информационная безопасность',
-		text_title: 'Надежные решения информационной безопасности для бизнеса',
-		text_content:
-			'Повысьте свой уровень безопасности с помощью наших экспертных аутсорсинговых услуг по информационной безопасности. Наша команда сертифицированных профессионалов предлагает комплексные решения для защиты ваших данных и инфраструктуры. Мы обеспечим вас от оценки рисков до реагирования на инциденты. Сосредоточьтесь на своем основном бизнесе, пока мы занимаемся вашей кибербезопасностью',
-		button_text: 'Узнать больше',
-	}
-
-	const FAQ = [
-		{
-			question: 'Что такое аутсорсинг IT-услуг?',
-			answer:
-				'ИТ-аутсорсинг — это практика найма внешних поставщиков услуг для выполнения задач и функций, связанных с ИТ.',
-		},
-		{
-			question: 'Какие виды IT-услуг предоставляет ваша компания?',
-			answer:
-				'Мы предоставляем весь спектр IT-услуг, включая разработку программного обеспечения, веб-разработку, техническую поддержку и консалтинг.',
-		},
-		{
-			question: 'Каковы преимущества аутсорсинга информационной безопасности?',
-			answer:
-				'Преимущества аутсорсинга ИБ включают экспертность, сокращение затрат, обновление технологий и снижение рисков в области защиты конфидециальных данных.',
-		},
-		{
-			question: 'Входит ли мониторинг серверов и сетей в ваши услуги?',
-			answer:
-				'Да, мы предоставляем непрерывный контроль и оперативное реагирование на любые сетевые проблемы, включая несанкционированный доступ и изменения конфигурации оборудования.',
-		},
-		{
-			question:
-				'Как вы обеспечиваете конфиденциальность клиентской информации?',
-			answer:
-				'Мы обеспечиваем конфиденциальность клиентской информации через защищенные системы, шифрование данных и обучение сотрудников по вопросам безопасности.',
-		},
-		{
-			question:
-				'Какие меры предосторожности использует ваша компания для предотвращения кибератак?',
-			answer:
-				'Мы используем собственные разработки для мониторинга сетевой активности, сбора событий информационной безопасности и проводим регулярный аудит систем безопасности.',
-		},
-	]
-
-	const SOLUTIONS_CARDS = [
-		{
-			image_path: '/svg/oil-rig.svg',
-			title: 'Нефтегазовое машиностроение',
-		},
-		{ image_path: '/svg/barrel.svg', title: 'Нефтесервис' },
-		{
-			image_path: '/svg/bucket-wheel.svg',
-			title: 'Горнорудная отрасль',
-		},
-		{ image_path: '/svg/pipe.svg', title: 'Трубная отрасль' },
-	]
-
-	const CUSTOMERS_CARDS = [
-		{
-			image_path: '/svg/Rimera.svg',
-			title: 'Rimera',
-		},
-		{ image_path: '/svg/Bistrickinskaya.svg', title: 'Bistrickinskaya' },
-		{
-			image_path: '/svg/Cybersteel.svg',
-			title: 'Cybersteel',
-		},
-		{ image_path: '/svg/Pressman.svg', title: 'Pressman' },
-	]
-
-	const CONTACTS_CARDS = [
-		{
-			title: 'E-mail',
-			subtitle:
-				'Для оперативной связи и отправки запросов через электронную почту',
-			data: 'info@api-factory.ru',
-			type: ContactType.email,
-		},
-		{
-			title: 'Телефон',
-			subtitle:
-				'Для быстрой связи и обратной связи по вопросам, требующим оперативного решения.',
-			data: '8 (495) 999-99-99',
-			type: ContactType.phone,
-		},
-		{
-			title: 'Адрес',
-			subtitle: 'Для личного обращения или отправки почтовой корреспонденции',
-			data: '121205, Российская Федерация, г. Москва, тер. Инновационного центра Сколково, Большой бульвар, д. 40',
-			type: ContactType.address,
-		},
-	]
+	
+	const {keycloak} = useKeycloak();
 
 	return (
-		<ReactKeycloakProvider authClient={keycloak}>
+		<>
 			<Navbar
-				nav_links={NAV_LINKS}
+				nav_links={db.NAV_LINKS}
 				position={Position.top}
 				logo_path='/svg/logo.svg'
-				right_side={<button>Вход для клиентов</button>}
+				right_side={
+					<>
+					{/* {!!keycloak.authenticated? (
+						<button>
+							
+							<Link to={'/account'}>
+							Личный кабинет
+							</Link>
+						</button>
+
+					):(
+						<button onClick={() => {keycloak.login()}}>
+							Вход для клиентов
+						</button>
+					)} */}
+						{!keycloak.authenticated && (
+								<button
+									type="button"
+									className="text-blue-800"
+									onClick={() => keycloak.login()}
+								>
+									Login
+								</button>
+							)}
+
+							{!!keycloak.authenticated && (
+								<button
+									type="button"
+									className="text-blue-800"
+									onClick={() => keycloak.logout()}
+								>
+									Logout ({keycloak.tokenParsed?.preferred_username})
+								</button>
+							)}
+					</>
+				}
+			
 			/>
 			<main>
 				<div className={app.hero}>
@@ -207,37 +79,40 @@ function Home() {
 					</div>
 				</div>
 				<TwiceSection
-					text_small={OUTSOURCING_BLOCK.text_small}
-					text_title={OUTSOURCING_BLOCK.text_title}
-					text_subtitle={OUTSOURCING_BLOCK.text_subtitle}
-					text_subtitle_button={OUTSOURCING_BLOCK.text_subtitle_button}
-					image_path={OUTSOURCING_BLOCK.image_path}
+					text_small={db.OUTSOURCING_BLOCK.text_small}
+					text_title={db.OUTSOURCING_BLOCK.text_title}
+					text_subtitle={db.OUTSOURCING_BLOCK.text_subtitle}
+					text_subtitle_button={db.OUTSOURCING_BLOCK.text_subtitle_button}
+					image_path={db.OUTSOURCING_BLOCK.image_path}
 				/>
 				<CardsSection
 					className='bg-[#f5f5f5]'
-					text_title={SERVICE_BLOCK.text_title}
-					text_subtitle={SERVICE_BLOCK.text_subtitle}
-					cards={SERVICE_BLOCK.cards}
+					titleClassName='me-[50px]'
+					text_title={db.SERVICE_BLOCK.text_title}
+					text_subtitle={db.SERVICE_BLOCK.text_subtitle}
+					cards={db.SERVICE_BLOCK.cards}
 				/>
 				<TextSection
-					text_small={TEXT_SECTION_BLOCK.text_small}
-					text_title={TEXT_SECTION_BLOCK.text_title}
-					text_content={TEXT_SECTION_BLOCK.text_content}
-					button_text={TEXT_SECTION_BLOCK.button_text}
+					text_small={db.TEXT_SECTION_BLOCK.text_small}
+					text_title={db.TEXT_SECTION_BLOCK.text_title}
+					text_content={db.TEXT_SECTION_BLOCK.text_content}
+					button_text={db.TEXT_SECTION_BLOCK.button_text}
 				/>
 				<CardsSection
+					titleClassName='me-[50px]'
 					className='bg-[white]'
-					text_title={SECURITY_BLOCK.text_title}
-					text_subtitle={SECURITY_BLOCK.text_subtitle}
-					cards={SECURITY_BLOCK.cards}
+					text_title={db.SECURITY_BLOCK.text_title}
+					text_subtitle={db.SECURITY_BLOCK.text_subtitle}
+					cards={db.SECURITY_BLOCK.cards}
 				/>
 				<TwiceSection
 					className='bg-[#f5f5f5]'
-					text_small={INNOVATIONS_BLOCK.text_small}
-					text_title={INNOVATIONS_BLOCK.text_title}
-					text_subtitle={INNOVATIONS_BLOCK.text_subtitle}
-					text_subtitle_button={INNOVATIONS_BLOCK.text_subtitle_button}
-					image_path={INNOVATIONS_BLOCK.image_path}
+					titleClassName='pe-[50px]'
+					text_small={db.INNOVATIONS_BLOCK.text_small}
+					text_title={db.INNOVATIONS_BLOCK.text_title}
+					text_subtitle={db.INNOVATIONS_BLOCK.text_subtitle}
+					text_subtitle_button={db.INNOVATIONS_BLOCK.text_subtitle_button}
+					image_path={db.INNOVATIONS_BLOCK.image_path}
 				/>
 				<section>
 					<div className='container'>
@@ -245,7 +120,7 @@ function Home() {
 							Различные отраслевые решения
 						</h1>
 						<div className='flex justify-between'>
-							{SOLUTIONS_CARDS.map(card => (
+							{db.SOLUTIONS_CARDS.map(card => (
 								<div key={card.image_path} className='w-[200px] flex flex-col'>
 									<img
 										className='h-[50px] mb-[28px]'
@@ -258,11 +133,11 @@ function Home() {
 								</div>
 							))}
 						</div>
-						<h1 className='mt-[60px] text-center font-bold text-[24px] mb-[44px]'>
+						<h1 className='mt-[60px] text-center font-medium text-[24px] mb-[44px]'>
 							Нам доверяют ведущие компании отрасли по всему миру
 						</h1>
 						<div className='flex justify-between'>
-							{CUSTOMERS_CARDS.map(card => (
+							{db.CUSTOMERS_CARDS.map(card => (
 								<img
 									key={card.image_path}
 									src={card.image_path}
@@ -277,7 +152,7 @@ function Home() {
 						<h1 className='text-center font-semibold text-[36px] mb-[36px]'>
 							Часто задаваемые вопросы
 						</h1>
-						{FAQ.map(iterator => (
+						{db.FAQ.map(iterator => (
 							<QuestionBox
 								key={iterator.question}
 								question={iterator.question}
@@ -298,7 +173,7 @@ function Home() {
 				<section>
 					<div className='container'>
 						<div className='flex flex-row justify-between'>
-							{CONTACTS_CARDS.map(contact => (
+							{db.CONTACTS_CARDS.map(contact => (
 								<Contact
 									key={contact.data}
 									title={contact.title}
@@ -312,7 +187,7 @@ function Home() {
 				</section>
 			</main>
 			<Footer />
-		</ReactKeycloakProvider>
+		</>
 	)
 }
 

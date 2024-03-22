@@ -98,7 +98,7 @@ form {
 		transform: scale(1);
 	}
 
-	input:not([type='checkbox']) {
+	input:not([type='checkbox']):not([type='tel']) {
 		outline: none;
 		width: 100%;
 		background: none;

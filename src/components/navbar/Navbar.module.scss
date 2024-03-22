@@ -60,6 +60,7 @@ $navbar_breakpoints: (1280px, 1700px);
 			height: inherit;
 			display: flex;
 			align-items: center;
+			flex-shrink: 0;
 
 			& > .navbar_menuLink {
 				text-decoration: none;

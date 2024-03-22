@@ -17,6 +17,7 @@
     "@types/react-leaflet": "^3.0.0",
     "@types/three": "^0.162.0",
     "classnames": "^2.5.1",
+    "keycloak-js": "^24.0.1",
     "locomotive-scroll": "^5.0.0-beta.11",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",

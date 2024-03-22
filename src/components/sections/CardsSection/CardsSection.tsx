@@ -3,6 +3,7 @@ import styles from './CardsSection.module.scss'
 
 export interface Props {
 	className?: string
+	titleClassName?: string
 	text_title: string
 	text_subtitle: string
 	cards: Array<Card>
@@ -19,7 +20,7 @@ export const CardsSection = (props: Props) => {
 		<section className={props.className}>
 			<div className='container'>
 				<div className={styles.text}>
-					<p className={styles.text_title}>{props.text_title}</p>
+					<p className={`${styles.text_title} ${props.titleClassName}`}>{props.text_title}</p>
 					<p className={styles.text_subtitle}>{props.text_subtitle}</p>
 				</div>
 				<div className={styles.cards}>
