@@ -5,6 +5,13 @@ import { Navbar, Position } from '../navbar/Navbar'
 import styles from './Footer.module.scss'
 
 export const Footer = () => {
+	const NAV_LINKS = [
+		{ text: 'О компании', url: '/about' },
+		{ text: 'Отраслевые решения', url: '/solutions' },
+		{ text: 'Услуги и цены', url: '/services_and_prices' },
+		{ text: 'Заказчики', url: '/customers' },
+		{ text: 'Контакты', url: '/contacts' },
+	]
 	return (
 		<footer className={styles.footer}>
 			<div className='container'>
@@ -48,6 +55,7 @@ export const Footer = () => {
 				</div>
 			</div>
 			<Navbar
+				nav_links={NAV_LINKS}
 				position={Position.bottom}
 				logo_path='/svg/logo2.svg'
 				right_side={

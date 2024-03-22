@@ -1,8 +1,10 @@
 import { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 import styles from './Navbar.module.scss'
 
 export interface Props {
 	className?: string
+	nav_links: Array<{ text: string; url: string }>
 	position: Position
 	logo_path: string
 	right_side: ReactNode
@@ -17,8 +19,8 @@ export const Navbar = (props: Props) => {
 	const scrollHandler = () => {
 		const HERO_HEIGHT = document.querySelector("[class*='hero']")?.clientHeight
 		if (!HERO_HEIGHT) return false
-		// TODO: xD
-		const scrollTop =
+		// TODO: очеловечить
+		const SCROLL_TOP =
 			window.scrollY > HERO_HEIGHT / 2
 				? window.scrollY / 10 > 100
 					? 100
@@ -28,7 +30,7 @@ export const Navbar = (props: Props) => {
 			.querySelector('nav')
 			?.setAttribute(
 				'style',
-				`background-color: rgba(255, 255, 255, ${scrollTop}%)`
+				`background-color: rgba(255, 255, 255, ${SCROLL_TOP}%)`
 			)
 	}
 
@@ -43,21 +45,13 @@ export const Navbar = (props: Props) => {
 				</a>
 				<div className={styles.navbar_menu}>
 					<ul className={styles.navbar_menuList}>
-						<li className={styles.navbar_menuListItem}>
-							<a href='' className={styles.navbar_menuLink}>
-								О компании
-							</a>
-						</li>
-						<li className={styles.navbar_menuListItem}>
-							<a href='' className={styles.navbar_menuLink}>
-								Услуги
-							</a>
-						</li>
-						<li className={styles.navbar_menuListItem}>
-							<a href='' className={styles.navbar_menuLink}>
-								Контакты
-							</a>
-						</li>
+						{props.nav_links.map(link => (
+							<li key={link.url} className={styles.navbar_menuListItem}>
+								<Link to={link.url} className={styles.navbar_menuLink}>
+									{link.text}
+								</Link>
+							</li>
+						))}
 					</ul>
 				</div>
 				<div className={styles.rightSide}>{props.right_side}</div>

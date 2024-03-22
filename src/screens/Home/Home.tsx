@@ -13,6 +13,13 @@ import app from '../../styles/app.module.scss'
 import '../../styles/common.scss'
 
 function Home() {
+	const NAV_LINKS = [
+		{ text: 'О компании', url: '/about' },
+		{ text: 'Отраслевые решения', url: '/solutions' },
+		{ text: 'Услуги и цены', url: '/services_and_prices' },
+		{ text: 'Заказчики', url: '/customers' },
+		{ text: 'Контакты', url: '/contacts' },
+	]
 	const OUTSOURCING_BLOCK = {
 		text_small: 'Аутсорсинг',
 		text_title: 'Трансформируйте свой бизнес с помощью наших решений',
@@ -177,6 +184,7 @@ function Home() {
 	return (
 		<ReactKeycloakProvider authClient={keycloak}>
 			<Navbar
+				nav_links={NAV_LINKS}
 				position={Position.top}
 				logo_path='/svg/logo.svg'
 				right_side={<button>Вход для клиентов</button>}
